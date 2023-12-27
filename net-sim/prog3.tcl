@@ -17,35 +17,35 @@ set winFile1 [open WinFile1 w]
 
 #Finish Procedure
 proc Finish {} {
-#Dump all trace data and Close the files
-global ns ntrace namfile
-$ns flush-trace
-close $ntrace
-close $namfile
+    #Dump all trace data and Close the files
+    global ns ntrace namfile
+    $ns flush-trace
+    close $ntrace
+    close $namfile
 
-#Execute the NAM animation file
-exec nam prog3.nam &
+    #Execute the NAM animation file
+    exec nam prog3.nam &
 
-#Plot the Congestion Window graph using xgraph
-exec xgraph WinFile0 WinFile1 &
-exit 0
+    #Plot the Congestion Window graph using xgraph
+    exec xgraph WinFile0 WinFile1 &
+    exit 0
 }
 
 #Plot Window Procedure
 proc PlotWindow {tcpSource file} {
-global ns
-set time 0.1
-set now [$ns now]
-set cwnd [$tcpSource set cwnd_]
+    global ns
+    set time 0.1
+    set now [$ns now]
+    set cwnd [$tcpSource set cwnd_]
 
-# To plot graph over x and y axis
-puts $file "$now $cwnd"
-$ns at [expr $now+$time] "PlotWindow $tcpSource $file"
+    # To plot graph over x and y axis
+    puts $file "$now $cwnd"
+    $ns at [expr $now+$time] "PlotWindow $tcpSource $file"
 }
 
 #Create 6 nodes
 for {set i 0} {$i<6} {incr i} {
-set n($i) [$ns node]
+    set n($i) [$ns node]
 }
 
 #Create duplex links between the nodes
@@ -65,12 +65,6 @@ $ns duplex-link-op $n(2) $n(3) orient right
 $ns queue-limit $n(2) $n(3) 20
 $ns duplex-link-op $n(2) $n(3) queuePos 0.5
 
-#Set error model on link n(2) to n(3) (optional- to analyse the amt of drop removed pkts in tr file)
-set loss_module [new ErrorModel]
-$loss_module ranvar [new RandomVariable/Uniform]
-$loss_module drop-target [new Agent/Null]
-$ns lossmodel $loss_module $n(2) $n(3)
-
 #Set up the TCP connection between n(0) and n(4)
 set tcp0 [new Agent/TCP/Newreno]
 $tcp0 set fid_ 1
@@ -80,8 +74,6 @@ $ns attach-agent $n(0) $tcp0
 set sink0 [new Agent/TCPSink/DelAck]
 $ns attach-agent $n(4) $sink0
 $ns connect $tcp0 $sink0
-
-
 
 #Apply FTP Application over TCP
 set ftp0 [new Application/FTP]

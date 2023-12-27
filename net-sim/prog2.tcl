@@ -13,37 +13,34 @@ $ns namtrace-all $namfile
 
 #Finish Procedure
 proc Finish {} {
-global ns ntrace namfile
+    global ns ntrace namfile
 
-#Dump all trace data and close the file
-$ns flush-trace
-close $ntrace
-close $namfile
+    #Dump all trace data and close the file
+    $ns flush-trace
+    close $ntrace
+    close $namfile
 
-#Execute the nam animation file
-exec nam prog2.nam &
+    #Execute the nam animation file
+    exec nam prog2.nam &
 
-#Find the number of ping packets dropped
-puts "The number of ping packets dropped are "
-exec grep "^d" prog2.tr | cut -d " " -f 5 | grep -c "ping" &
-exit 0
+    #Find the number of ping packets dropped
+    puts "The number of ping packets dropped are "
+    exec grep "^d" prog2.tr &
+    exit 0
 }
 
 #Create six nodes
 for {set i 0} {$i < 6} {incr i} {
-set n($i) [$ns node]
+    set n($i) [$ns node]
 }
 
 #Connect the nodes
 for {set j 0} {$j < 5} {incr j} {
-$ns duplex-link $n($j) $n([expr ($j+1)]) 0.1Mb 10ms DropTail
+    $ns duplex-link $n($j) $n([expr ($j+1)]) 0.1Mb 10ms DropTail
 }
 
-#Define the recv function for the class 'Agent/Ping'
 Agent/Ping instproc recv {from rtt} {
-$self instvar node_
-puts "node [$node_ id] received ping answer from $from with round trip time $rtt
-ms"
+    $self instvar node_
 }
 
 #Create two ping agents and attach them to n(0) and n(5)

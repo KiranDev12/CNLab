@@ -103,14 +103,14 @@ $ftp0 attach-agent $tcp0
 #===================================
 #Define a 'finish' procedure
 proc finish {} {
-global ns tracefile namfile
-$ns flush-trace
-close $tracefile
-close $namfile
-exec nam prog4.nam &
-exec echo "Number of packets dropped is : " &
-exec grep -c "^D" prog4.tr &
-exit 0
+	global ns tracefile namfile
+	$ns flush-trace
+	close $tracefile
+	close $namfile
+	exec nam prog4.nam &
+	exec echo "Number of packets dropped is : " &
+	exec grep -c "^D" prog4.tr &
+	exit 0
 }
 
 $ns at 1.0 "$cbr0 start"
@@ -129,28 +129,28 @@ $ns run
 //===================================
 
 BEGIN{
-count1=0
-count2=0
-pack1=0
-pack2=0
-time1=0
-time2=0
+	count1=0
+	count2=0
+	pack1=0
+	pack2=0
+	time1=0
+	time2=0
 }
 {
-if($1=="r" && $3=="_1_" && $4=="RTR")
-{
-count1++
-pack1=pack1+$8
-time1=$2
-}
-if($1=="r" && $3=="_2_" && $4=="RTR")
-{
-count2++
-pack2=pack2+$8
-time2=$2
-}
+	if($1=="r" && $3=="_1_" && $4=="RTR")
+	{
+		count1++
+		pack1=pack1+$8
+		time1=$2
+	}
+	if($1=="r" && $3=="_2_" && $4=="RTR")
+	{
+		count2++
+		pack2=pack2+$8
+		time2=$2
+	}
 }
 END{
-printf("The Throughput from n0 to n1: %f Mbps \n", ((count1*pack1*8)/(time1*1000000)));
-printf("The Throughput from n1 to n2: %f Mbps \n", ((count2*pack2*8)/(time2*1000000)));
+	printf("The Throughput from n0 to n1: %f Mbps \n", ((count1*pack1*8)/(time1*1000000)));
+	printf("The Throughput from n1 to n2: %f Mbps \n", ((count2*pack2*8)/(time2*1000000)));
 }
