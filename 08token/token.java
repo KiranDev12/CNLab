@@ -3,11 +3,11 @@ import java.util.Scanner;
 public class token {
     public static void main(String[] args) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
-        int tokens = 0; // initial number of tokens in the bucket
+        int tokens = 0;
         System.out.println("Enter the rate at which tokens must be added: ");
-        int rate = scanner.nextInt(); // rate at which tokens are added to the bucket
+        int rate = scanner.nextInt(); 
         System.out.println("Enter the capacity of the bucket: ");
-        int capacity = scanner.nextInt(); // maximum number of tokens the bucket can hold
+        int capacity = scanner.nextInt();
 
         System.out.print("Enter number of requests: ");
         int n = scanner.nextInt();

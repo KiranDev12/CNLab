@@ -20,7 +20,7 @@ public class rsa {
             }
             e++;
         }
-        return -1; // No coprime found, should not happen in practice
+        return -1;
     }
 
     public static int findPrivateKey(int e, int phi) {
