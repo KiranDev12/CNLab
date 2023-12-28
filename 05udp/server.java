@@ -9,20 +9,19 @@ class server {
         String message;
         byte[] buffer;
         DatagramPacket datagramPacket;
+        int cnt = 0;
         System.out.println("Enter messages to send: ");
         while (true) {
             message = in.nextLine();
             buffer = message.getBytes();
             datagramPacket = new DatagramPacket(buffer, buffer.length, clientAddress, 4000);
             datagramSocket.send(datagramPacket);
-
-            if (message.equalsIgnoreCase("exit")) {
-                datagramSocket.close();
+            cnt++;
+            if (cnt == 999)
                 break;
-            }
-
         }
         in.close();
+        datagramSocket.close();
     }
-
 }
+
