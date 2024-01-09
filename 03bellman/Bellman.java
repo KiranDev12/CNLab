@@ -26,10 +26,6 @@ public class Bellman {
                 }
             }
         }
-        printSolution(dist);
-    }
-
-    public static void printSolution(int[] dist) {
         System.out.println("Vertex\t Distance from source");
         for (int i = 0; i < n; i++)
             System.out.println((i + 1) + "\t\t" + dist[i]);

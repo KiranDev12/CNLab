@@ -2,6 +2,34 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "rsa",
+      "request": "launch",
+      "mainClass": "rsa",
+      "projectName": "cn_7c5af99"
+    },
+    {
+      "type": "java",
+      "name": "bellman",
+      "request": "launch",
+      "mainClass": "bellman",
+      "projectName": "cn_7c5af99"
+    },
+    {
+      "type": "java",
+      "name": "sort",
+      "request": "launch",
+      "mainClass": "sort",
+      "projectName": "cn_7c5af99"
+    },
+    {
+      "type": "java",
+      "name": "Sort",
+      "request": "launch",
+      "mainClass": "Sort",
+      "projectName": "cn_7c5af99"
+    },
+    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",

@@ -4,30 +4,28 @@ public class leaky {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the number of queries: ");
-        int noOfQueries = scanner.nextInt();
+        int n = scanner.nextInt();
         System.out.println("Enter the bucket size: ");
-        int bucketSize = scanner.nextInt();
-        int inputPacketSize;
+        int size = scanner.nextInt();
+        int packetSize;
         System.out.println("Enter the constant output rate: ");
-        int outputPacketSize = scanner.nextInt();
-        int storedBufferSize = 0;
+        int constantOutput = scanner.nextInt();
+        int buffer = 0;
         int sizeLeft;
-
-        for (int i = 0; i < noOfQueries; i++) {
+        for (int i = 0; i < n; i++) {
             System.out.print("Input Packet Size: ");
-            inputPacketSize = scanner.nextInt();
-
-            sizeLeft = bucketSize - storedBufferSize;
-            if (inputPacketSize <= sizeLeft) {
-                storedBufferSize += inputPacketSize;
+            packetSize = scanner.nextInt();
+            sizeLeft = size - buffer;
+            if (packetSize <= sizeLeft) {
+                buffer += packetSize;
             } else {
                 System.out.println("Packet Dropped");
             }
-            System.out.println("Stored Buffer Size: " + storedBufferSize);
-            storedBufferSize -= outputPacketSize;
+            buffer -= constantOutput;
             System.out.println("---------------");
-            System.out.println(outputPacketSize + " packets sent ...");
+            System.out.println(constantOutput + " packets sent ...");
             System.out.println("---------------");
+            System.out.println("Stored Buffer Size: " + buffer);
         }
         scanner.close();
     }
