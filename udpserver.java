@@ -1,7 +1,7 @@
 import java.net.*;
 import java.util.Scanner;
 
-class server {
+class udpserver {
     public static void main(String args[]) throws Exception {
         Scanner in = new Scanner(System.in);
         DatagramSocket datagramSocket = new DatagramSocket();

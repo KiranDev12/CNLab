@@ -1,6 +1,6 @@
 import java.net.*;
 
-class client {
+class udpclient {
     public static void main(String args[]) throws Exception {
         DatagramSocket datagramSocket = new DatagramSocket(4000);
         byte[] buffer;
