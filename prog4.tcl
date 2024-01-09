@@ -1,20 +1,14 @@
-
 set ns [new Simulator]
-
 
 set topo [new Topography]
 $topo load_flatgrid 1500 1500
 
-
 set tracefile [open prog4.tr w]
 $ns trace-all $tracefile
-
 
 set namfile [open prog4.nam w]
 $ns namtrace-all $namfile
 $ns namtrace-all-wireless $namfile 1500 1500
-
-
 
 proc finish {} {
 	global ns tracefile namfile
@@ -79,13 +73,11 @@ $ns attach-agent $n4 $null1
 $ns connect $udp0 $null1
 $udp0 set packetSize_ 1500
 
-
 set tcp0 [new Agent/TCP]
 $ns attach-agent $n3 $tcp0
 set sink1 [new Agent/TCPSink]
 $ns attach-agent $n5 $sink1
 $ns connect $tcp0 $sink1
-
 
 set cbr0 [new Application/Traffic/CBR]
 $cbr0 attach-agent $udp0
@@ -96,7 +88,6 @@ $cbr0 set random_ null
 set ftp0 [new Application/FTP]
 $ftp0 attach-agent $tcp0
 
-
 $ns at 1.0 "$cbr0 start"
 $ns at 2.0 "$ftp0 start"
 $ns at 180.0 "$ftp0 stop"
@@ -106,30 +97,3 @@ $ns at 70 "$n4 setdest 100 60 20"
 $ns at 100 "$n4 setdest 700 300 20"
 $ns at 150 "$n4 setdest 900 200 20"
 $ns run
-
-BEGIN{
-	count1=0
-	count2=0
-	pack1=0
-	pack2=0
-	time1=0
-	time2=0
-}
-{
-	if($1=="r" && $3=="_1_" && $4=="RTR")
-	{
-		count1++
-		pack1=pack1+$8
-		time1=$2
-	}
-	if($1=="r" && $3=="_2_" && $4=="RTR")
-	{
-		count2++
-		pack2=pack2+$8
-		time2=$2
-	}
-}
-END{
-	printf("The Throughput from n0 to n1: %f Mbps \n", ((count1*pack1*8)/(time1*1000000)));
-	printf("The Throughput from n1 to n2: %f Mbps \n", ((count2*pack2*8)/(time2*1000000)));
-}

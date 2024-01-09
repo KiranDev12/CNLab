@@ -28,7 +28,6 @@ proc PlotWindow {tcpSource file} {
     set now [$ns now]
     set cwnd [$tcpSource set cwnd_]
 
-    # To plot graph over x and y axis
     puts $file "$now $cwnd"
     $ns at [expr $now+$time] "PlotWindow $tcpSource $file"
 }

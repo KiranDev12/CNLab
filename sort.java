@@ -10,7 +10,8 @@ class Frame {
         this.seqno = seqno;
     }
 }
-public class Sort {
+
+public class sort {
     public static void main(String[] args) {
         ArrayList<Frame> frames = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
@@ -20,12 +21,12 @@ public class Sort {
             System.out.printf("Enter the data of the " + i + " frame: ");
             int data = sc.nextInt();
             int seqno = (int) (Math.random() * 100);
-            System.out.println(seqno);
             frames.add(new Frame(data, seqno));
         }
         System.out.println("The frame list before sorting is: ");
+        System.out.println("Number|Data");
         for (Frame frame : frames) {
-            System.out.println(frame.seqno + "|" + frame.data);
+            System.out.println(frame.seqno + "    |   " + frame.data);
         }
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
@@ -37,8 +38,9 @@ public class Sort {
             }
         }
         System.out.println("The frame list after sorting is: ");
+        System.out.println("Number|Data");
         for (Frame frame : frames) {
-            System.out.println(frame.seqno + "|" + frame.data);
+            System.out.println(frame.seqno + "    |   " + frame.data);
         }
         sc.close();
     }

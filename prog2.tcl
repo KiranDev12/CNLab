@@ -1,4 +1,3 @@
-
 set ns [new Simulator]
 
 $ns color 1 Blue
@@ -12,14 +11,10 @@ $ns namtrace-all $namfile
 proc Finish {} {
     global ns ntrace namfile
 
-    $ns flush-trace
-    close $ntrace
-    close $namfile
-
     exec nam prog2.nam &
 
-    puts "The number of ping packets dropped are "
-    exec grep "^d" prog2.tr &
+    exec echo "The number of ping packets dropped are "
+    exec grep -c "^d" prog2.tr &
     exit 0
 }
 for {set i 0} {$i < 6} {incr i} {
