@@ -9,7 +9,6 @@ public class rsa {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the plain text: ");
         String input = sc.nextLine();
-        System.out.println("Input string: " + input);
 
         BigInteger p = BigInteger.probablePrime(bitLength, r);
         BigInteger q = BigInteger.probablePrime(bitLength, r);

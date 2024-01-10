@@ -18,13 +18,10 @@ public class leaky {
             sizeLeft = size - buffer;
             if (packetSize <= sizeLeft) {
                 buffer += packetSize;
+                buffer -= constantOutput;
             } else {
                 System.out.println("Packet Dropped");
             }
-            buffer -= constantOutput;
-            System.out.println("---------------");
-            System.out.println(constantOutput + " packets sent ...");
-            System.out.println("---------------");
             System.out.println("Stored Buffer Size: " + buffer);
         }
         scanner.close();

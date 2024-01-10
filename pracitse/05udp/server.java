@@ -4,24 +4,18 @@ import java.util.Scanner;
 class server {
     public static void main(String args[]) throws Exception {
         Scanner in = new Scanner(System.in);
-        DatagramSocket datagramSocket = new DatagramSocket();
-        InetAddress clientAddress = InetAddress.getByName("127.0.0.1");
-        String message;
-        byte[] buffer;
-        DatagramPacket datagramPacket;
-        int cnt = 0;
-        System.out.println("Enter messages to send: ");
+        InetAddress addr = InetAddress.getByName("127.0.0.1");
+        DatagramSocket sock = new DatagramSocket();
+        String msg;
+        byte[] data;
+        DatagramPacket packet;
         while (true) {
-            message = in.nextLine();
-            buffer = message.getBytes();
-            datagramPacket = new DatagramPacket(buffer, buffer.length, clientAddress, 4000);
-            datagramSocket.send(datagramPacket);
-            cnt++;
-            if (cnt == 999)
-                break;
+            System.out.println("Enter the message: ");
+            msg = in.nextLine();
+            data = msg.getBytes();
+            packet = new DatagramPacket(data, data.length, addr, 4000);
+            sock.send(packet);
         }
-        in.close();
-        datagramSocket.close();
     }
 }
 
